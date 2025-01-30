@@ -7,13 +7,13 @@ import (
 )
 
 func RegisterBookRoutes(router *gin.Engine,
-	readController *controllers.ReadBookController,
-	createController *controllers.CreateBookController,
-	deleteController *controllers.DeleteBookController,
-	updateController *controllers.UpdateBookController) {
+	readBookController *controllers.ReadBookController,
+	createBookController *controllers.CreateBookController,
+	deleteBookController *controllers.DeleteBookController,
+	updateBookController *controllers.UpdateBookController) {
 
-	router.GET("/books", readController.Handle)
-	router.POST("/books", createController.Handle)
-	router.DELETE("/books/:id", deleteController.Execute)
-	router.PUT("/books/:id", updateController.Handle)
+	router.GET("/books", readBookController.Handle)
+	router.POST("/books", createBookController.Handle)
+	router.PUT("/books/:id", updateBookController.Handle)
+	router.DELETE("/books/:id", deleteBookController.Execute)
 }

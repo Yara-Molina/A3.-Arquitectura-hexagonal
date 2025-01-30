@@ -1,24 +1,25 @@
 package main
 
 import (
-	infrastructure "project1/src/books/infraestructure"
-	"project1/src/books/infraestructure/routes"
-	infrastructure "project1/src/reader/infraestructure"
-	"project1/src/reader/infraestructure/routes"
+	infrastructureB "project1/src/books/infraestructure"
+	routesB "project1/src/books/infraestructure/routes"
+	infrastructureR "project1/src/reader/infraestructureR"
+	routesR "project1/src/reader/infraestructureR/routes"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
 	router := gin.Default()
 
-	readBookController, createBookController, updateBookController, deleteBookController := infrastructure.Init()
+	readBookController, createBookController, updateBookController, deleteBookController := infrastructureB.Init()
 
-	viewReaderController, safeReaderController, upgradeReaderController, eraseReaderController := infrastructure.Init()
+	routesB.RegisterBookRoutes(router, readBookController, createBookController, deleteBookController, updateBookController)
 
-	routes.RegisterBookRoutes(router, readBookController, createBookController, deleteBookController, updateBookController)
+	eraseReaderController, safeReaderController, upgradeReaderController, viewReaderController := infrastructureR.InitReader()
 
-	readerRoutes.RegisterReaderRoutes(router, viewReaderController, safeReaderController, upgradeReaderController, eraseReaderController)
+	routesR.RegisterReaderRoutes(router, eraseReaderController, safeReaderController, upgradeReaderController, viewReaderController)
 
 	router.Run(":8080")
 }

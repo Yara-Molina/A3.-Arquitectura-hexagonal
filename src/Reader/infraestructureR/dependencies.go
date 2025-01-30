@@ -2,11 +2,10 @@ package infrastructure
 
 import (
 	"project1/src/reader/application"
-	"project1/src/reader/infraestructure/controllers"
+	"project1/src/reader/infraestructureR/controllers"
 )
 
-func Init() (*controllers.ViewReaderController, *controllers.SafeReaderController, *controllers.UpgradeReaderController, *controllers.EraseReaderController) {
-
+func InitReader() (*controllers.ViewReaderController, *controllers.SafeReaderController, *controllers.UpgradeReaderController, *controllers.EraseReaderController) {
 	readerRepository := NewMySQL()
 
 	viewReaderUseCase := application.NewViewReader(readerRepository)
